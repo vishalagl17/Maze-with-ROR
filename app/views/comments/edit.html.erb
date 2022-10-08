@@ -1,0 +1,13 @@
+<h1>Edit Comment Article</h1>
+<%= form_with model: @comment, url:"/articles/#{@article.id}/comments/#{@comment.id}" do |form| %>
+  <div class="secondContainerCreatePostBar">
+    <%= form.text_field :body, placeholder: "Whats happening ?" %><br>
+    <% @comment.errors.full_messages_for(:body).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
+
+  <div class="secondConatinerCreateArticleButton">
+    <%= form.submit "Post"%>
+  </div>
+<% end %>

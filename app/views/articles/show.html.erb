@@ -1,0 +1,91 @@
+<div>
+  <nav class="navbarTopMazeProject">
+    <div class="mazeImgNavbar">
+      <%= image_tag "mazeimage.png" %>
+    </div>
+    <div class="mazeTextNavbar">
+      <h1>Maze</h1>
+    </div>
+    <input type="text" id="searchPostNavbar" placeholder="Search for something here... ">
+  </nav>
+</div>
+
+<br>
+
+<div class="secondContainerMazeProject">
+  <br>
+  <div class="thirdContainerPostBody">
+    <div class="thirdContainerTitleBar"><h2>Maze User with red dot 2022  </h2>
+        <br>
+       <p><%= @article.body %></p>
+        <div class="dropdown" >
+      <span class="dropbtn">...</span>
+      <div class="dropdown-content">
+        <%= link_to "Edit", edit_article_path(@article) %>
+        <%= link_to "Destroy", article_path(@article), data: {
+          turbo_method: :delete,
+          turbo_confirm: "Are you sure?"
+        } %>
+      </div>
+    </div>
+        <br>
+
+        <br>
+      <hr color="lightgrey">
+      <br>
+
+        <div class="thirdContainerLikeCommentPics">
+      <div class="thirdContainerLikePic">
+        <div><%= image_tag "heart.png" %></div>
+        <div>Like</div>
+      </div>
+
+      <div class="thirdContainerCommentPic">
+        <div><%= image_tag "comment.png" %></div>
+        <div>comment</div>
+
+      </div>
+      <br>
+    </div>
+        <br>
+        <hr color="lightgrey">
+        <br>
+    </div>
+    <%= form_with model: [ @article, @article.comments.build ] do |form| %>
+      <br>
+      <div class="thirdConatinerCreateComment"><%= form.text_field :body, placeholder:"Write a comment.." %></div>
+      <button type="submit" class="thirdConatinerCreateCommentButton">
+        <%#= form.submit%>
+        <%= image_tag "commentbutton.png", class:"thirdContainerCreateCommentIcon" %></button>
+
+    <% end %>
+    <div class="showPageShowAllComments">
+    <h3>Comments</h3>
+    <% @article.comments.each do |comment| %>
+        <hr color="lightgrey">
+        <br>
+      <%= comment.body %>
+      <%= comment.id %>
+        <p>
+
+          <%#= link_to "Edit Comment", edit_article_comment_path({article_id:@article.id,id:comment.id}) %>
+          <%= link_to "Edit Comment", [comment.article, comment] %>
+
+          <%= link_to "Destroy Comment", [comment.article, comment], data: {
+            turbo_method: :delete,
+            turbo_confirm: "Are you sure?"
+          } %>
+
+
+        </p>
+        <br>
+        <br>
+    <% end %>
+
+    </div>
+
+
+
+  </div>
+  <br>
+</div>
